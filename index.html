@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kirill Karmanov</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0f0f;
+    --paper: #f7f5f0;
+    --rule: #d0ccc4;
+    --accent: #c0392b;
+    --accent2: #1a3a5c;
+    --muted: #6b6560;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'IBM Plex Serif', serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  header {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 4rem 2rem 2rem;
+    border-bottom: 3px solid var(--ink);
+    width: 100%;
+  }
+  header h1 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  header p {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.88rem;
+    color: var(--muted);
+    margin-top: 0.4rem;
+  }
+  main {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem;
+    width: 100%;
+    flex: 1;
+  }
+  .section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1.2rem;
+  }
+  .article {
+    display: block;
+    padding: 1.2rem 0;
+    border-bottom: 1px solid var(--rule);
+    text-decoration: none;
+    color: inherit;
+  }
+  .article:first-of-type { border-top: 1px solid var(--rule); }
+  .article-date {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--muted);
+    margin-bottom: 0.3rem;
+  }
+  .article-title {
+    font-family: 'IBM Plex Serif', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.3rem;
+    transition: color 0.15s;
+  }
+  .article:hover .article-title { color: var(--accent2); }
+  .article-desc {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  footer {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 1.5rem 2rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--muted);
+    border-top: 1px solid var(--rule);
+    width: 100%;
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Kirill Karmanov</h1>
+  <p>Research workpapers on cybersecurity, AI risk, and financial sector resilience.</p>
+</header>
+<main>
+  <div class="section-label">Articles</div>
+  <a class="article" href="/mythos-and-friends/">
+    <div class="article-date">April 2026</div>
+    <div class="article-title">Mythos and Friends: Defending Against Frontier-AI-Enabled Cyber Threats</div>
+    <div class="article-desc">A practitioner's playbook of scenarios and protection measures for financial institutions. 29 measures across short, medium, and long term horizons.</div>
+  </a>
+</main>
+<footer>Kirill Karmanov · Personal research — views do not represent any employer or client</footer>
+</body>
+</html>
