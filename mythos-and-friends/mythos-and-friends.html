@@ -1,0 +1,1532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mythos and Friends: Defending Against Frontier-AI-Enabled Cyber Threats</title>
+<meta name="description" content="A practitioner's playbook of scenarios and protection measures for financial institutions facing frontier-AI-enabled cyber threats. By Kirill Karmanov, April 2026.">
+<meta name="author" content="Kirill Karmanov">
+<meta property="og:title" content="Mythos and Friends: Defending Against Frontier-AI-Enabled Cyber Threats">
+<meta property="og:description" content="A practitioner's playbook of scenarios and protection measures for financial institutions. 29 measures across short, medium, and long term horizons.">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,600;1,300&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0f0f;
+    --paper: #f7f5f0;
+    --rule: #d0ccc4;
+    --accent: #c0392b;
+    --accent2: #1a3a5c;
+    --mono: #3d3d3d;
+    --muted: #6b6560;
+    --tag-bg: #e8e4dc;
+    --code-bg: #1e1e1e;
+    --code-fg: #d4d4d4;
+    --max: 780px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { font-size: 17px; scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'IBM Plex Serif', Georgia, serif;
+    font-weight: 400;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── HEADER ── */
+  header {
+    border-bottom: 3px solid var(--ink);
+    padding: 3rem 2rem 2.5rem;
+    max-width: var(--max);
+    margin: 0 auto;
+  }
+
+  .label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+  }
+
+  h1 {
+    font-family: 'IBM Plex Serif', serif;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+
+  .subtitle {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 1.8rem;
+  }
+
+  .meta {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  .meta span { display: flex; align-items: center; gap: 0.4rem; }
+
+  /* ── LAYOUT ── */
+  .container {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 2rem 6rem;
+  }
+
+  /* ── TOC ── */
+  .toc {
+    margin: 2.5rem 0;
+    padding: 1.5rem 1.8rem;
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--accent2);
+    background: white;
+  }
+
+  .toc-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+
+  .toc ol {
+    padding-left: 1.2rem;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.88rem;
+    line-height: 1.9;
+  }
+
+  .toc a {
+    color: var(--accent2);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s;
+  }
+
+  .toc a:hover { border-bottom-color: var(--accent2); }
+
+  /* ── AUTHOR NOTE ── */
+  .author-note {
+    margin: 2rem 0 3rem;
+    padding: 1.2rem 1.8rem;
+    border-left: 3px solid var(--rule);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.88rem;
+    font-style: italic;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* ── SECTIONS ── */
+  section { margin-top: 3rem; }
+
+  h2 {
+    font-family: 'IBM Plex Serif', serif;
+    font-size: 1.35rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 1rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  h3 {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 1.8rem 0 0.6rem;
+  }
+
+  h4 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    margin: 1.4rem 0 0.4rem;
+  }
+
+  p { margin-bottom: 1rem; }
+
+  /* ── MEASURE CARDS ── */
+  .measure {
+    margin: 2rem 0;
+    border: 1px solid var(--rule);
+    background: white;
+    overflow: hidden;
+  }
+
+  .measure-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.4rem 0.8rem;
+    border-bottom: 1px solid var(--rule);
+    background: var(--tag-bg);
+  }
+
+  .measure-id {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+    margin-top: 0.15rem;
+  }
+
+  .measure-title {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--ink);
+    flex: 1;
+    line-height: 1.35;
+  }
+
+  .measure-badges {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+    padding: 0.2rem 0.5rem;
+    border: 1px solid;
+    white-space: nowrap;
+  }
+
+  .badge-complexity-trivial { color: #2e7d32; border-color: #2e7d32; }
+  .badge-complexity-low { color: #1565c0; border-color: #1565c0; }
+  .badge-complexity-medium { color: #e65100; border-color: #e65100; }
+  .badge-complexity-high { color: #b71c1c; border-color: #b71c1c; }
+  .badge-complexity-veryhigh { color: #4a148c; border-color: #4a148c; }
+  .badge-effort { color: var(--muted); border-color: var(--rule); }
+
+  .measure-body { padding: 1.2rem 1.4rem; }
+
+  .measure-row {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 0.3rem 0.8rem;
+    margin-bottom: 0.7rem;
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
+  .measure-row-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    text-transform: uppercase;
+    padding-top: 0.1rem;
+  }
+
+  .measure-row-value {
+    font-family: 'IBM Plex Sans', sans-serif;
+    color: var(--ink);
+  }
+
+  .measure-desc {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--ink);
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .measure-desc p { margin-bottom: 0.7rem; }
+  .measure-desc p:last-child { margin-bottom: 0; }
+
+  /* ── TECHNICAL DETAIL ── */
+  .tech-detail {
+    margin-top: 1rem;
+    padding: 1rem 1.2rem;
+    background: #f0ede6;
+    border-left: 2px solid var(--accent2);
+  }
+
+  .tech-detail-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 0.6rem;
+  }
+
+  .tech-detail p, .tech-detail li {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.85rem;
+    line-height: 1.65;
+    color: var(--mono);
+  }
+
+  /* ── CODE ── */
+  pre {
+    background: var(--code-bg);
+    color: var(--code-fg);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    line-height: 1.6;
+    padding: 1.2rem 1.4rem;
+    overflow-x: auto;
+    margin: 0.8rem 0;
+    border-radius: 2px;
+  }
+
+  code {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82em;
+    background: var(--tag-bg);
+    padding: 0.1em 0.35em;
+    border-radius: 2px;
+    color: var(--accent2);
+  }
+
+  pre code { background: none; padding: 0; color: inherit; font-size: inherit; }
+
+  /* ── LISTS ── */
+  ul, ol {
+    padding-left: 1.4rem;
+    margin-bottom: 1rem;
+  }
+
+  li { margin-bottom: 0.35rem; }
+
+  /* ── MATRIX TABLE ── */
+  .matrix-wrap { overflow-x: auto; margin: 1.5rem 0; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.8rem;
+  }
+
+  th {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: var(--tag-bg);
+    padding: 0.5rem 0.8rem;
+    text-align: left;
+    border-bottom: 2px solid var(--rule);
+    white-space: nowrap;
+  }
+
+  td {
+    padding: 0.45rem 0.8rem;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+    line-height: 1.4;
+  }
+
+  tr:hover td { background: rgba(0,0,0,0.02); }
+
+  td:first-child {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  .phase-row td {
+    background: var(--accent2);
+    color: white;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+  }
+
+  /* ── PRINCIPLES ── */
+  .principle {
+    margin: 1.5rem 0;
+    padding: 1rem 1.4rem;
+    border: 1px solid var(--rule);
+    background: white;
+  }
+
+  .principle-id {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--accent2);
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+
+  .principle-title {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .principle p {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.88rem;
+    line-height: 1.65;
+    color: var(--mono);
+    margin-bottom: 0;
+  }
+
+  /* ── CLOSING ── */
+  .closing {
+    margin-top: 3rem;
+    padding: 2rem 2rem;
+    background: var(--accent2);
+    color: white;
+  }
+
+  .closing h2 {
+    color: white;
+    border-top: none;
+    padding-top: 0;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .closing p {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.92rem;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.88);
+  }
+
+  /* ── ANNEX ── */
+  .annex-section { margin-top: 1.5rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 2rem 2rem;
+    border-top: 1px solid var(--rule);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    html { font-size: 15px; }
+    header, .container { padding-left: 1.2rem; padding-right: 1.2rem; }
+    .measure-header { flex-wrap: wrap; }
+    .measure-row { grid-template-columns: 1fr; }
+    .measure-row-label { margin-bottom: 0; }
+    footer { flex-direction: column; }
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    body { background: white; font-size: 11pt; }
+    .measure { break-inside: avoid; }
+    pre { white-space: pre-wrap; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="label">Research Workpaper · April 2026</div>
+  <h1>Mythos and Friends: Defending Against Frontier-AI-Enabled Cyber Threats</h1>
+  <p class="subtitle">A practitioner's playbook of scenarios and protection measures for financial institutions</p>
+  <div class="meta">
+    <span>By Kirill Karmanov</span>
+    <span>29 measures · S/M/L horizon</span>
+    <span>April 2026</span>
+  </div>
+</header>
+
+<div class="container">
+
+  <div class="author-note">
+    <strong>Author's note.</strong> This is a research workpaper. I wrote it to give businesses some food for thought, and to set out a list of practical measures that can be considered now, calmly, rather than in the panic and chaos of an urgent response when the threat lands. The research draws on my own experience and risk evaluation, open information sources, and advanced AI toolkits. The ideas here are personal and do not represent the views of any employer or client.
+  </div>
+
+  <div class="toc">
+    <div class="toc-title">Contents</div>
+    <ol>
+      <li><a href="#about">About this article</a></li>
+      <li><a href="#threat-model">Operating assumptions and threat model</a></li>
+      <li><a href="#principles">Cross-cutting principles</a></li>
+      <li><a href="#short-term">Short term (0–6 months) — measures S-01 to S-12</a></li>
+      <li><a href="#medium-term">Medium term (6–18 months) — measures M-01 to M-11</a></li>
+      <li><a href="#long-term">Long term (18+ months) — measures L-01 to L-06</a></li>
+      <li><a href="#matrix">Complexity matrix and sequencing dependencies</a></li>
+      <li><a href="#closing">Two things I keep coming back to</a></li>
+      <li><a href="#annex-a">Annex A — Detection-engineering patterns</a></li>
+      <li><a href="#annex-b">Annex B — Vulnerability prioritisation reference</a></li>
+      <li><a href="#annex-c">Annex C — Glossary</a></li>
+    </ol>
+  </div>
+
+  <!-- ── 1. ABOUT ── -->
+  <section id="about">
+    <h2>1. About this article</h2>
+    <p>Anthropic's announcement of Claude Mythos Preview in April 2026, and the Project Glasswing programme that accompanied it, made one thing concrete that the security community had been discussing in abstract for years: frontier AI models can now find and weaponise software vulnerabilities at machine speed, with minimal human guidance. Independent evaluation by the UK AI Security Institute and others has corroborated the headline claims. Whether or not Mythos itself ever escapes its controlled-access regime, equivalent capabilities are arriving in other models, including ones with far weaker safeguards.</p>
+    <p>Banks and other financial institutions are exposed in particular ways. They run consequential, real-time, interconnected systems, sit on regulated data and on the means of payment, and face well-funded and unusually patient adversaries. Most importantly, the historical defensive playbook — periodic scans, signature-based detection, perimeter trust, eventually-consistent patch SLAs — was built around threat actors operating at human pace. Speed has changed; the rest of the playbook has not yet caught up.</p>
+    <p>This article is my attempt at writing down what to actually do about it, in concrete terms. It is meant for cybersecurity and IT engineers: CISOs and their deputies, SOC leads, vulnerability management, IAM, security architecture, detection engineers, incident response, network and endpoint teams. It is not a strategy paper, a regulatory primer, or a vendor comparison. Where it makes sense to be opinionated, I have been — and the underlying view, which I will return to at the end, is that the only realistic answer to AI-augmented attackers is to master the use of AI on the defensive side at least as competently.</p>
+
+    <h3>How the playbook is structured</h3>
+    <p>Each measure is presented as an action card with a fixed structure: <strong>ID</strong> (short reference), <strong>Title and complexity rating</strong> with indicative effort, <strong>Risk covered</strong>, <strong>Attack vector</strong> (MITRE ATT&CK tactics), <strong>Prerequisites</strong>, and <strong>Description</strong> with optional technical detail.</p>
+
+    <h4>COMPLEXITY SCALE</h4>
+    <p>Complexity reflects engineering and operational difficulty, not strategic importance:</p>
+    <ul>
+      <li><strong>Trivial</strong> — configuration change, hours of work, no architectural impact.</li>
+      <li><strong>Low</strong> — tooling-supported, days of work, single team.</li>
+      <li><strong>Medium</strong> — sprint-scale, weeks, two or three teams in coordination.</li>
+      <li><strong>High</strong> — programme-scale, months, multi-team, change management non-trivial.</li>
+      <li><strong>Very High</strong> — architectural, multi-quarter, requires new capability or significant reskilling.</li>
+    </ul>
+
+    <p>Most measures are tunings, accelerations, or extensions of work that mature cyber organisations already do. None should be read as a recommendation to procure a new platform unless the technical detail block explicitly says so. The premise throughout is that the capability you need is usually already deployed somewhere in the estate, and the gap is most often in coverage, tuning, integration, or speed.</p>
+  </section>
+
+  <!-- ── 2. THREAT MODEL ── -->
+  <section id="threat-model">
+    <h2>2. Operating assumptions and threat model</h2>
+    <p>The measures in this article are written for an adversary that has access — directly, through online services that fail to refuse offensive requests, or through open-weights models — to capabilities of the same class as Anthropic's Claude Mythos Preview. These capabilities are not theoretical. They have been independently corroborated by the UK AI Security Institute and academic groups. The five points below are what I take from that, and what the rest of the article is built on.</p>
+
+    <h3>2.1 Compressed disclose-to-exploit window</h3>
+    <p>Weaponised exploits for newly disclosed CVEs in widely deployed software now appear within hours of disclosure, not days. This is consistent with the latest ENISA threat-landscape reporting and with observed industry behaviour. Patch SLAs that assume a several-day exploitation lag are obsolete for internet-facing assets, and probably for many internal ones too.</p>
+
+    <h3>2.2 Autonomous, multi-step adversary operations</h3>
+    <p>An adversary can now run continuous, agentic offensive operations against a target environment for extended periods at low cost, parallelising across many targets. AISI's evaluation showed Mythos completing the full 32-step "The Last Ones" simulated network attack end-to-end. Detection logic that triggers on individual TTPs in isolation will be evaded. What you actually need is detection that fires on the kill chain as a whole.</p>
+
+    <h3>2.3 Industrialised social engineering</h3>
+    <p>Any individual employee with a public footprint can be the target of bespoke, multi-channel, multi-language social engineering — including voice and video deepfakes referencing real context — at a marginal cost per target that is now near zero. Phishing-resilience programmes built to defend against generic-quality lures are no longer fit for purpose.</p>
+
+    <h3>2.4 Vendor and open-source dependency exposure</h3>
+    <p>An adversary with frontier-model assistance can find vulnerabilities in almost any non-trivial codebase faster than the code's maintainer can patch them. For most institutions, this exposure is dominated by third-party software, where direct technical mitigation is limited and the only realistic response is structural — blast-radius reduction, SBOM-driven detection, vendor assurance.</p>
+
+    <h3>2.5 Detection telemetry as adversary target</h3>
+    <p>A sophisticated adversary will try to disable, blind, or evade telemetry collection early in an operation. EDR tampering, log forwarder kill, and timestomp are now baseline expected behaviours. Detection logic must include detection of detection-disablement, otherwise the whole investment becomes worthless the moment the agent goes silent.</p>
+
+    <h3>2.6 What is not assumed</h3>
+    <ul>
+      <li>That the adversary has direct access to Mythos Preview itself. The threat is from capability proliferation, not from Mythos as a specific weapon.</li>
+      <li>That no human is in the loop on the offensive side. Frontier models accelerate human attackers, they do not yet replace them.</li>
+      <li>That existing controls are worthless. The point of the article is to identify where existing controls need recalibration, extension, or coverage closure.</li>
+    </ul>
+
+    <h3>2.7 The asymmetry, and what it implies for ambition</h3>
+    <p>The attacker only needs one serious vulnerability to do the job. The defender has to be right about every one of them. That asymmetry was already uncomfortable when humans were doing the looking; it becomes far worse when AI can check them all, automatically, in parallel, around the clock. My belief is that internal cyber metrics should target 100% compliance as their stated ambition — not because anyone realistically expects to hit it, but because anything less builds in tolerance for exactly the kind of single overlooked weakness that a frontier-model-assisted attacker will find first.</p>
+
+    <h3>2.8 Developer tooling has become its own supply-chain surface</h3>
+    <p>AI coding assistants (GitHub Copilot, Cursor, Claude Code, JetBrains AI, and equivalents) routinely send code context to external APIs as part of normal operation. MCP servers, IDE plugins, and VS Code or JetBrains extensions execute with full IDE process permissions and have direct access to source code, environment variables, and any credentials present on the developer's machine. Several material incidents in 2025 and 2026 have come from poisoned or malicious MCP servers and from compromised marketplace extensions with seven-figure install counts.</p>
+    <p>As a starting set of minimum controls:</p>
+    <ul>
+      <li>An approved-tools register for AI coding assistants and MCP servers. Anything not on the register is denied at the egress proxy and at the IDE plugin manifest level.</li>
+      <li>Plugin and extension governance for VS Code, JetBrains, and equivalents. Block the marketplace's general install path; install from a curated internal mirror only.</li>
+      <li>Network isolation for build agents and CI runners. Build agents should not have outbound access to public AI inference endpoints unless a specific pipeline step requires it.</li>
+      <li>Secret scanning triggered on AI tool activity.</li>
+      <li>Hardware-bound credentials on developer workstations for anything that touches production.</li>
+    </ul>
+  </section>
+
+  <!-- ── 3. PRINCIPLES ── -->
+  <section id="principles">
+    <h2>3. Cross-cutting principles</h2>
+    <p>Seven principles run through the measures that follow. They are stated here once so the action cards do not need to repeat them.</p>
+
+    <div class="principle">
+      <div class="principle-id">3.1</div>
+      <div class="principle-title">Speed-to-decision over information completeness</div>
+      <p>Detection and response pipelines have to be set up for fast, defensible decisions on incomplete information. A 30-minute manual triage that ends in certainty is worse than a 2-minute decision that errs on the side of containment, given the pace the adversary is now able to operate at.</p>
+    </div>
+
+    <div class="principle">
+      <div class="principle-id">3.2</div>
+      <div class="principle-title">Containment by default</div>
+      <p>Architecture and IAM choices have to start from the assumption that any single asset, account, or service is compromised. The cost of lateral movement that you can impose on the adversary is the single most useful thing you can invest in.</p>
+    </div>
+
+    <div class="principle">
+      <div class="principle-id">3.3</div>
+      <div class="principle-title">Telemetry first</div>
+      <p>Controls without telemetry are theatrical. Every measure proposed below produces or assumes telemetry. Detection of control failure is itself a control. Saying "we have an EDR" is meaningless without coverage metrics, tamper detection, and a response that has actually been exercised.</p>
+    </div>
+
+    <div class="principle">
+      <div class="principle-id">3.4</div>
+      <div class="principle-title">Detect on intent, not artefact</div>
+      <p>AI-augmented adversaries can mass-produce previously-unseen artefacts (binaries, payloads, infrastructure). Detection logic built on hashes, lists, and signatures will degrade quickly. Detection that fires on observable intent degrades far more slowly.</p>
+    </div>
+
+    <div class="principle">
+      <div class="principle-id">3.5</div>
+      <div class="principle-title">Identity is the perimeter</div>
+      <p>In a hybrid-cloud, SaaS-heavy estate, the network is no longer a meaningful trust boundary. Identity, device posture, and session context are. Controls that act on identity scale across the estate; controls that depend on network position do not.</p>
+    </div>
+
+    <div class="principle">
+      <div class="principle-id">3.6</div>
+      <div class="principle-title">Build for the next CVE, not the last incident</div>
+      <p>Every measure here should be judged on whether it would have helped against the next, unknown vulnerability or campaign, not on whether it would have caught the most recent one.</p>
+    </div>
+
+    <div class="principle">
+      <div class="principle-id">3.7</div>
+      <div class="principle-title">The quality of the underlying reference data is non-negotiable</div>
+      <p>No cyber protection process can be efficient if the reference data underneath it is wrong, stale, or partial. Asset inventories, configuration baselines, ownership registers, network maps, identity catalogues — the ground truth that every other control depends on. Spending on shiny new platforms while the basic registers are unreliable is one of the most expensive mistakes you can make.</p>
+    </div>
+  </section>
+
+  <!-- ── 4. SHORT TERM ── -->
+  <section id="short-term">
+    <h2>4. Short term (0–6 months)</h2>
+    <p>Twelve measures, ordered roughly by sequencing dependency. Most are tuning and coverage-closure work on existing capabilities, plus a small number that require lightweight tooling additions. None require new architecture or major procurement.</p>
+
+    <div class="measure">
+      <div class="measure-header">
+        <div>
+          <div class="measure-id">S-01</div>
+          <div class="measure-title">Recalibrate vulnerability SLAs against EPSS, KEV, and exposure</div>
+        </div>
+        <div class="measure-badges">
+          <span class="badge badge-complexity-low">Low</span>
+          <span class="badge badge-effort">2–4 weeks</span>
+        </div>
+      </div>
+      <div class="measure-body">
+        <div class="measure-row"><div class="measure-row-label">Risk</div><div class="measure-row-value">Compromise via newly-disclosed CVE before existing SLA window expires.</div></div>
+        <div class="measure-row"><div class="measure-row-label">ATT&CK</div><div class="measure-row-value">TA0001 Initial Access via T1190 Exploit Public-Facing Application; T1212 Credential Access; T1068 Privilege Escalation.</div></div>
+        <div class="measure-row"><div class="measure-row-label">Prerequisites</div><div class="measure-row-value">Vulnerability scanner (Tenable/Qualys/Rapid7). Asset inventory with internet-exposure flag. CMDB for asset criticality. EPSS and KEV feeds (free).</div></div>
+        <div class="measure-desc">
+          <p>Replace flat CVSS-driven SLAs with a multi-signal prioritisation model. CVSS measures severity if exploited; EPSS estimates exploitation probability in the next 30 days; KEV confirms current in-the-wild exploitation. Combined with asset exposure and criticality, this allows defensible patch ordering under volume pressure.</p>
+          <div class="tech-detail">
+            <div class="tech-detail-label">Technical detail</div>
+            <p><strong>Suggested tier definitions for internet-exposed assets:</strong></p>
+            <ul>
+              <li><strong>P0</strong> — On KEV, OR EPSS ≥ 0.6, OR vendor advisory references active exploitation. SLA: emergency change, patch within 8h, compensating control within 4h.</li>
+              <li><strong>P1</strong> — CVSS ≥ 8.0 AND EPSS ≥ 0.1, not yet KEV. SLA: 24 hours.</li>
+              <li><strong>P2</strong> — CVSS ≥ 7.0 OR EPSS ≥ 0.05. SLA: 7 days.</li>
+              <li><strong>P3</strong> — Below thresholds. SLA: standard 30-day cycle.</li>
+            </ul>
+            <p>For non-internet-exposed assets, shift each tier by one level. EPSS feed: <code>https://epss.empiricalsecurity.com/epss_scores-current.csv.gz</code></p>
+<pre># Daily EPSS ingestion (cron @ 06:00 UTC)
+curl -s https://epss.empiricalsecurity.com/epss_scores-current.csv.gz | \
+  gunzip | \
+  awk -F, 'NR>2 && $2>=0.05 {print $1","$2","$3}' > /var/data/epss-high.csv
+# Join with scanner output keyed on CVE-ID
+# Persist daily snapshots — EPSS trend matters more than absolute value</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="measure">
+      <div class="measure-header">
+        <div>
+          <div class="measure-id">S-02</div>
+          <div class="measure-title">Establish an emergency-change pathway for security-driven changes</div>
+        </div>
+        <div class="measure-badges">
+          <span class="badge badge-complexity-low">Low</span>
+          <span class="badge badge-effort">2–3 weeks</span>
+        </div>
+      </div>
+      <div class="measure-body">
+        <div class="measure-row"><div class="measure-row-label">Risk</div><div class="measure-row-value">Existing change-management cycle becomes the bottleneck on patch speed.</div></div>
+        <div class="measure-row"><div class="measure-row-label">ATT&CK</div><div class="measure-row-value">Same as S-01.</div></div>
+        <div class="measure-row"><div class="measure-row-label">Prerequisites</div><div class="measure-row-value">Existing change-management process. Engineering rota. Pre-defined reviewer set with delegated authority.</div></div>
+        <div class="measure-desc">
+          <p>Create a pre-authorised, well-instrumented emergency change pathway specifically for security patches and compensating controls, invokable by the SOC duty officer or vulnerability-management lead without case-by-case CAB approval, with mandatory after-the-fact review.</p>
+          <div class="tech-detail">
+            <div class="tech-detail-label">Technical detail — minimum control set</div>
+            <ul>
+              <li>Two-person authorisation in the change-management tool, one from a defined cyber role.</li>
+              <li>Automatic notification to system owner and CISO duty officer.</li>
+              <li>Mandatory rollback test or pre-staged rollback plan.</li>
+              <li>Twenty-four-hour after-action review.</li>
+              <li>Quarterly metrics review: rate of use, false-emergency rate, post-incident review of all uses.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="measure">
+      <div class="measure-header">
+        <div>
+          <div class="measure-id">S-03</div>
+          <div class="measure-title">Internet-facing attack surface inventory and reduction</div>
+        </div>
+        <div class="measure-badges">
+          <span class="badge badge-complexity-low">Low</span>
+          <span class="badge badge-effort">4–6 weeks</span>
+        </div>
+      </div>
+      <div class="measure-body">
+        <div class="measure-row"><div class="measure-row-label">Risk</div><div class="measure-row-value">Unknown or undocumented internet-exposed assets become path of least resistance for autonomous reconnaissance.</div></div>
+        <div class="measure-row"><div class="measure-row-label">ATT&CK</div><div class="measure-row-value">TA0043 Reconnaissance T1595, T1592; TA0001 Initial Access T1190.</div></div>
+        <div class="measure-row"><div class="measure-row-label">Prerequisites</div><div class="measure-row-value">External ASM capability (Censys, Shodan-based ASM, Defender EASM, Mandiant ASM). Authoritative DNS records.</div></div>
+        <div class="measure-desc">
+          <p>Run a fresh external attack-surface discovery against all known IP ranges, registered domains, and cloud-tenant boundaries. Reconcile against the asset inventory. Triage every unmatched finding: (1) legitimate but unrecorded, (2) abandoned and removable, (3) shadow IT.</p>
+          <div class="tech-detail">
+            <div class="tech-detail-label">Technical detail — high-value findings</div>
+            <ul>
+              <li>Authentication portals (RDP, SSH, VPN admin, Citrix, vCenter) reachable from the public internet without IP allow-listing.</li>
+              <li>Cloud storage buckets with public read/write.</li>
+              <li>Subdomain takeover candidates (CNAME pointing at decommissioned cloud resources).</li>
+              <li>Exposed management planes for SaaS connectors (CI/CD runners, observability platforms).</li>
+              <li>Forgotten WAF-bypass routes (hostnames resolving directly to origin IPs).</li>
+            </ul>
+            <p>Treat every unmatched finding as P1 by default. Force a within-72h decision: remove vs. record vs. accept.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="measure">
+      <div class="measure-header">
+        <div>
+          <div class="measure-id">S-04</div>
+          <div class="measure-title">Phishing-simulation programme uplift for AI-grade lures</div>
+        </div>
+        <div class="measure-badges">
+          <span class="badge badge-complexity-low">Low</span>
+          <span class="badge badge-effort">6–8 weeks</span>
+        </div>
+      </div>
+      <div class="measure-body">
+        <div class="measure-row"><div class="measure-row-label">Risk</div><div class="measure-row-value">Personnel compromise via high-fidelity, multi-channel social engineering (text + voice + video).</div></div>
+        <div class="measure-row"><div class="measure-row-label">ATT&CK</div><div class="measure-row-value">TA0001 T1566 Phishing (.001, .002, .003); T1684.001 Impersonation; T1598 Phishing for Information.</div></div>
+        <div class="measure-row"><div class="measure-row-label">Prerequisites</div><div class="measure-row-value">Existing phishing-simulation platform (KnowBe4, Cofense, Hoxhunt). HR list of high-value populations.</div></div>
+        <div class="measure-desc">
+          <p>Refresh the simulation programme to include language-localised, contextually personalised lures generated with current-generation tools. Move from annual to quarterly cadence for high-value populations; include voice (synthesised audio) and where feasible video deepfake exposures.</p>
+          <div class="tech-detail">
+            <div class="tech-detail-label">Technical detail</div>
+            <ul>
+              <li>Multi-language lures matching the languages of the target population (not English only).</li>
+              <li>Personalisation drawing on legitimate public context (recent announcements, LinkedIn activity, conference attendance).</li>
+              <li>Voice-call follow-up referencing a real meeting, for the executive simulation cohort.</li>
+              <li>A small number of "impossible" deepfake video lures per cycle for the executive cohort, with mandatory debrief.</li>
+            </ul>
+            <p><strong>Out-of-band verification protocol:</strong> any request for payment authorisation, credential disclosure, urgent access provisioning, or signing of unfamiliar documents must be verified through a pre-agreed second channel.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="measure">
+      <div class="measure-header">
+        <div>
+          <div class="measure-id">S-05</div>
+          <div class="measure-title">Privileged-access tightening: just-in-time elevation and session recording</div>
+        </div>
+        <div class="measure-badges">
+          <span class="badge badge-complexity-medium">Medium</span>
+          <span class="badge badge-effort">3–4 months</span>
+        </div>
+      </div>
+      <div class="measure-body">
+        <div class="measure-row"><div class="measure-row-label">Risk</div><div class="measure-row-value">Standing administrative privilege gives the adversary a small set of very high-value credentials to steal.</div></div>
+        <div class="measure-row"><div class="measure-row-label">ATT&CK</div><div class="measure-row-value">TA0004 T1078 Valid Accounts; TA0008 T1021 Remote Services; TA0006 Credential Access.</div></div>
+        <div class="measure-row"><div class="measure-row-label">Prerequisites</div><div class="measure-row-value">Existing PAM platform (CyberArk, Delinea, BeyondTrust, HashiCorp Vault). Authoritative privileged account inventory. Tier-0/1/2 model defined.</div></div>
+        <div class="measure-desc">
+          <p>Reduce standing administrative privilege to the minimum compatible with operations. Implement just-in-time elevation with explicit time-bounded grants for all interactive admin sessions. Enable session recording for Tier-0 and Tier-1 activity, with recordings written to write-once storage outside the administered domain.</p>
+          <div class="tech-detail">
+            <div class="tech-detail-label">Technical detail — tier model</div>
+            <ul>
+              <li><strong>Tier-0</strong> — directory services, IdPs, CAs, KMS. Standing privilege: zero. Approval: named human in another team. Max session: 4 hours, recorded.</li>
+              <li><strong>Tier-1</strong> — production app admins, DBAs, hypervisor admins. Standing privilege: zero. Approval: queue-based on-call gate. Max session: 8 hours.</li>
+              <li><strong>Tier-2</strong> — workstation admin, helpdesk. Standing privilege: limited per-task. JIT for everything else.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="measure">
+      <div class="measure-header">
+        <div>
+          <div class="measure-id">S-06</div>
+          <div class="measure-title">MFA hardening: phishing-resistant factors for high-value workflows</div>
+        </div>
+        <div class="measure-badges">
+          <span class="badge badge-complexity-medium">Medium</span>
+          <span class="badge badge-effort">3–6 months</span>
+        </div>
+      </div>
+      <div class="measure-body">
+        <div class="measure-row"><div class="measure-row-label">Risk</div><div class="measure-row-value">Push-bombing, MFA fatigue, and AiTM proxy attacks defeat first-generation MFA.</div></div>
+        <div class="measure-row"><div class="measure-row-label">ATT&CK</div><div class="measure-row-value">T1621 MFA Request Generation; T1556.006 Modify Authentication; T1111 MFA Interception.</div></div>
+        <div class="measure-row"><div class="measure-row-label">Prerequisites</div><div class="measure-row-value">Existing MFA deployment. IdP supporting WebAuthn/FIDO2 (Entra ID, Okta, Ping/ForgeRock). Hardware key procurement budget for high-value populations.</div></div>
+        <div class="measure-desc">
+          <p>Migrate from push-notification or TOTP MFA to phishing-resistant factors (WebAuthn/FIDO2, platform passkeys, or hardware tokens such as YubiKey 5) for all high-value populations and all administrative authentication. Phishing-resistant MFA defeats AiTM proxy attacks because the WebAuthn challenge is cryptographically bound to the origin domain.</p>
+          <div class="tech-detail">
+            <div class="tech-detail-label">Technical detail — migration sequence</div>
+            <ul>
+              <li>Phase 1: enable WebAuthn alongside existing factors. No removal yet.</li>
+              <li>Phase 2: enforce WebAuthn-only for administrative and Tier-0/Tier-1 access.</li>
+              <li>Phase 3: enforce for high-value workflows (payment authorisation, treasury, M&A).</li>
+              <li>Phase 4: extend to general user population, with break-glass alternative for hardware loss.</li>
+            </ul>
+<pre>policy: "admin-mfa-fido2-only"
+  conditions:
+    users: group("PrivilegedRoleAssignees")
+    applications: any
+  controls:
+    grant:
+      authentication_strength: "phishing_resistant_mfa"
+      block_legacy_auth: true</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="measure">
+      <div class="measure-header">
+        <div>
+          <div class="measure-id">S-07</div>
+          <div class="measure-title">EDR coverage and tamper-detection audit</div>
+        </div>
+        <div class="measure-badges">
+          <span class="badge badge-complexity-low">Low</span>
+          <span class="badge badge-effort">3–4 weeks</span>
+        </div>
+      </div>
+      <div class="measure-body">
+        <div class="measure-row"><div class="measure-row-label">Risk</div><div class="measure-row-value">Endpoint compromise on assets where EDR is absent, mis-deployed, or silenced by the adversary.</div></div>
+        <div class="measure-row"><div class="measure-row-label">ATT&CK</div><div class="measure-row-value">TA0005 T1562.001 Disable/Modify Tools; T1070 Indicator Removal; T1218 System Binary Proxy Execution.</div></div>
+        <div class="measure-row"><div class="measure-row-label">Prerequisites</div><div class="measure-row-value">Existing EDR platform (CrowdStrike, SentinelOne, Defender for Endpoint). Authoritative endpoint inventory.</div></div>
+        <div class="measure-desc">
+          <p>Reconcile the EDR deployment census against the endpoint inventory. Implement tamper-detection alerting that fires when an EDR agent stops reporting, is uninstalled, or has its kernel components modified — at the same priority as a confirmed malicious-binary detection.</p>
+          <div class="tech-detail">
+            <div class="tech-detail-label">Technical detail — signals to alert on</div>
+            <ul>
+              <li>Agent service stopped, paused, or uninstalled — telemetry interruption longer than a tunable threshold (5–15 min for endpoints, 1 min for servers).</li>
+              <li>Kernel driver or system extension unloading on the protected endpoint.</li>
+              <li>Local administrator group modifications outside change windows.</li>
+              <li>Group Policy or MDM policy changes affecting EDR posture.</li>
+              <li>Suspicious use of vendor-supplied uninstaller tools.</li>
+            </ul>
+            <p>Alerts on tamper events must NOT be suppressible by the local administrator or by the host-agent itself.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="measure">
+      <div class="measure-header">
+        <div>
+          <div class="measure-id">S-08</div>
+          <div class="measure-title">Identity-protection alerts: impossible travel, token theft, and session anomalies</div>
+        </div>
+        <div class="measure-badges">
+          <span class="badge badge-complexity-low">Low</span>
+          <span class="badge badge-effort">2–4 weeks</span>
+        </div>
+      </div>
+      <div class="measure-body">
+        <div class="measure-row"><div class="measure-row-label">Risk</div><div class="measure-row-value">Token theft bypasses MFA entirely once the session is established.</div></div>
+        <div class="measure-row"><div class="measure-row-label">ATT&CK</div><div class="measure-row-value">T1539 Steal Web Session Cookie; T1528 Steal Application Access Token; T1550.004.</div></div>
+        <div class="measure-row"><div class="measure-row-label">Prerequisites</div><div class="measure-row-value">IdP with risk-based authentication (Entra ID Identity Protection, Okta ThreatInsight, PingOne Protect). SIEM with IdP log ingestion. Geo-IP enrichment.</div></div>
+        <div class="measure-desc">
+          <p>Most of these signals are already available in the IdP — most banks I've seen have them licensed and unconfigured. Token theft is one of the most under-detected real-world attack patterns in 2026. WebAuthn (S-06) hardens the front door, but it does not stop a stolen session token being replayed from attacker infrastructure.</p>
+          <div class="tech-detail">
+            <div class="tech-detail-label">Technical detail — detection logic</div>
+            <ul>
+              <li>Impossible travel — same user, two authentications from geographically inconsistent locations.</li>
+              <li>Anonymous IP — sign-in from Tor, known VPN exit, or hosting-provider IP.</li>
+              <li>Unusual sign-in properties — new device, browser, ASN combination on a high-privilege account.</li>
+              <li>Token issued from one IP, used from another (especially: issued from corporate VPN, used from cloud-hosting IP within minutes).</li>
+              <li>Service-principal anomalies — OAuth consent grants to newly-registered apps; high-privilege scope grants.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="measure">
+      <div class="measure-header">
+        <div>
+          <div class="measure-id">S-09</div>
+          <div class="measure-title">Egress filtering and DNS sinkholing for known-bad infrastructure</div>
+        </div>
+        <div class="measure-badges">
+          <span class="badge badge-complexity-low">Low</span>
+          <span class="badge badge-effort">4–6 weeks</span>
+        </div>
+      </div>
+      <div class="measure-body">
+        <div class="measure-row"><div class="measure-row-label">Risk</div><div class="measure-row-value">C2 beaconing, exfiltration, and second-stage payload retrieval over outbound connections from compromised internal hosts.</div></div>
+        <div class="measure-row"><div class="measure-row-label">ATT&CK</div><div class="measure-row-value">TA0011 C2 T1071, T1568; T1041 Exfiltration Over C2; T1567 Exfiltration Over Web Service.</div></div>
+        <div class="measure-row"><div class="measure-row-label">Prerequisites</div><div class="measure-row-value">Egress proxy or NGFW with TLS-inspection or SNI-based filtering. DNS infrastructure capable of ingesting block-lists. Threat-intelligence feed (Spamhaus, abuse.ch).</div></div>
+        <div class="measure-desc">
+          <p>Server populations typically have very narrow legitimate outbound destinations. Any deviation is signal. Block-listing of known-malicious infrastructure at DNS and egress proxy, combined with anomaly detection on outbound traffic from server populations that should not be making arbitrary outbound calls.</p>
+          <div class="tech-detail">
+            <div class="tech-detail-label">Technical detail — three holes SNI/DNS filtering does not close</div>
+            <ul>
+              <li><strong>DNS-over-HTTPS (DoH)</strong> — Force all DNS to internal resolvers; block known DoH provider IP ranges; deny outbound TCP/443 and UDP/443 to those endpoints from workstation segments.</li>
+              <li><strong>QUIC (UDP/443)</strong> — SNI inspection is TCP-layer; QUIC slips past it. Deny outbound UDP/443 from workstations except where explicitly allow-listed.</li>
+              <li><strong>Direct-to-IP HTTPS</strong> — Traffic that never resolves through the corporate resolver. Deny direct-to-IP outbound :443 from workstations.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="measure">
+      <div class="measure-header">
+        <div>
+          <div class="measure-id">S-10</div>
+          <div class="measure-title">Critical-asset patch tabletop and dry-run</div>
+        </div>
+        <div class="measure-badges">
+          <span class="badge badge-complexity-low">Low</span>
+          <span class="badge badge-effort">4 weeks</span>
+        </div>
+      </div>
+      <div class="measure-body">
+        <div class="measure-row"><div class="measure-row-label">Risk</div><div class="measure-row-value">Time spent rediscovering basic facts during a P0 response dominates the actual response time.</div></div>
+        <div class="measure-row"><div class="measure-row-label">Prerequisites</div><div class="measure-row-value">S-01 and S-02 in place. CMDB with application-to-infrastructure mapping. List of top internet-exposed application stacks.</div></div>
+        <div class="measure-desc">
+          <p>Run a structured tabletop covering a realistic P0 scenario for the top internet-exposed application stacks with actual on-call personnel. Time the responses. Identify and document the actual blockers — in my experience these are usually not technical but procedural (who can authorise a customer-impacting change at 03:00, who notifies the regulator).</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="measure">
+      <div class="measure-header">
+        <div>
+          <div class="measure-id">S-11</div>
+          <div class="measure-title">Service-account inventory and rotation programme launch</div>
+        </div>
+        <div class="measure-badges">
+          <span class="badge badge-complexity-medium">Medium</span>
+          <span class="badge badge-effort">3–6 months</span>
+        </div>
+      </div>
+      <div class="measure-body">
+        <div class="measure-row"><div class="measure-row-label">Risk</div><div class="measure-row-value">Long-lived, broadly-permissioned, forgotten service accounts are a primary lateral-movement target.</div></div>
+        <div class="measure-row"><div class="measure-row-label">ATT&CK</div><div class="measure-row-value">T1078.002 Domain Accounts; T1078.004 Cloud Accounts; T1098 Account Manipulation.</div></div>
+        <div class="measure-row"><div class="measure-row-label">Prerequisites</div><div class="measure-row-value">Directory services (AD, Entra ID, Okta) with audit logging. CMDB with service ownership. Vault platform (HashiCorp Vault, CyberArk Conjur, cloud-native KMS).</div></div>
+        <div class="measure-desc">
+          <p>Build and maintain an authoritative inventory of all non-human identities. For each: owner, purpose, scope of access, credential type, last rotation, last use, attached compensating controls. Eliminate the long tail (unused, unowned, over-permissioned). Establish rotation cadence by tier.</p>
+          <div class="tech-detail">
+            <div class="tech-detail-label">Technical detail — inventory data model</div>
+            <p>Account name, type, owning team, technical contact, business application, permissions held, credential metadata (last rotation, expiry, vault location), recent activity (last successful auth, source IP distribution).</p>
+            <p>Eliminate first, rotate second. Target removal: any account with no successful authentication in 90 days without a documented exception.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="measure">
+      <div class="measure-header">
+        <div>
+          <div class="measure-id">S-12</div>
+          <div class="measure-title">AI-augmented adversary scenarios in current TLPT cycle</div>
+        </div>
+        <div class="measure-badges">
+          <span class="badge badge-complexity-medium">Medium</span>
+          <span class="badge badge-effort">Current cycle</span>
+        </div>
+      </div>
+      <div class="measure-body">
+        <div class="measure-row"><div class="measure-row-label">Risk</div><div class="measure-row-value">TLPT exercises designed against pre-2026 adversary capability now systematically under-test the actual threat.</div></div>
+        <div class="measure-row"><div class="measure-row-label">Prerequisites</div><div class="measure-row-value">Active TLPT cycle (TIBER-EU, CBEST, or local equivalent). Threat Intelligence Provider engaged.</div></div>
+        <div class="measure-desc">
+          <p>In coordination with the appointed Threat Intelligence Provider, refresh the Targeted Threat Intelligence Report to explicitly include AI-augmented adversary TTPs: rapid vulnerability discovery in public-facing custom code, multi-language phishing at scale, voice/deepfake-augmented social engineering, autonomous lateral movement via chained low-severity findings.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 5. MEDIUM TERM ── -->
+  <section id="medium-term">
+    <h2>5. Medium term (6–18 months)</h2>
+    <p>Eleven measures. Programme-scale efforts that industrialise and extend the short-term work. Most need coordination across several engineering teams, dedicated programme management, and incremental tooling investment. They build directly on the short-term measures.</p>
+
+    <div class="measure">
+      <div class="measure-header">
+        <div><div class="measure-id">M-01</div><div class="measure-title">Continuous attack-surface management with automated revalidation</div></div>
+        <div class="measure-badges"><span class="badge badge-complexity-medium">Medium</span><span class="badge badge-effort">6–9 months</span></div>
+      </div>
+      <div class="measure-body">
+        <div class="measure-row"><div class="measure-row-label">Depends on</div><div class="measure-row-value">S-03</div></div>
+        <div class="measure-desc"><p>Move external attack-surface management from a one-time discovery exercise to a daily-cadence continuous capability with auto-ticketing of unmatched findings. Integrate with cloud-tenant inventory so that newly-provisioned cloud resources appear in the EASM view within hours. Pair with internal ASM including identity attack-path analysis (BloodHound Enterprise).</p></div>
+      </div>
+    </div>
+
+    <div class="measure">
+      <div class="measure-header">
+        <div><div class="measure-id">M-02</div><div class="measure-title">SBOM-driven vulnerability response for first-party software</div></div>
+        <div class="measure-badges"><span class="badge badge-complexity-high">High</span><span class="badge badge-effort">9–15 months</span></div>
+      </div>
+      <div class="measure-body">
+        <div class="measure-desc">
+          <p>Produce a Software Bill of Materials for every internally-developed application at build time, in CycloneDX or SPDX format. Store SBOMs centrally with build provenance. On CVE disclosure, query the SBOM repository to identify all affected applications within minutes.</p>
+<pre># In CI, after build:
+syft packages dir:./build -o cyclonedx-json > sbom.cdx.json
+
+# Push to central SBOM store:
+curl -X POST -H "Authorization: Bearer $TOKEN" \
+  --data-binary @sbom.cdx.json \
+  https://sbom-store.internal/v1/sbom/$APP/$VERSION
+
+# On CVE alert:
+curl https://sbom-store.internal/v1/affected?cve=CVE-2026-XXXXX
+# → list of all (app, version) pairs containing the vulnerable component</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="measure">
+      <div class="measure-header">
+        <div><div class="measure-id">M-03</div><div class="measure-title">Microsegmentation of Tier-0/Tier-1 systems</div></div>
+        <div class="measure-badges"><span class="badge badge-complexity-high">High</span><span class="badge badge-effort">12–18 months</span></div>
+      </div>
+      <div class="measure-body">
+        <div class="measure-row"><div class="measure-row-label">ATT&CK</div><div class="measure-row-value">TA0008 Lateral Movement: T1021, T1570, T1210.</div></div>
+        <div class="measure-row"><div class="measure-row-label">Prerequisites</div><div class="measure-row-value">Microsegmentation platform (Illumio, Akamai Guardicore, Cisco Secure Workload). Application dependency mapping.</div></div>
+        <div class="measure-desc">
+          <p>Implement default-deny lateral connectivity for Tier-0 and Tier-1 systems. Allow only explicitly defined east-west flows. Of all measures in this article, this is by far the most demanding to deliver. The technology has been mature for years — the difficulty is operational.</p>
+          <div class="tech-detail">
+            <div class="tech-detail-label">Technical detail — sequencing</div>
+            <ul>
+              <li>Phase 1 — discovery only. Deploy in observe mode 4–8 weeks per workload group.</li>
+              <li>Phase 2 — author policies in dry-run. Compare predicted blocks against observed traffic.</li>
+              <li>Phase 3 — enforcement on a single low-stakes Tier-1 application as canary. 30 days monitoring.</li>
+              <li>Phase 4 — staged rollout by criticality. Special-case Tier-0 first as an early win.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="measure">
+      <div class="measure-header">
+        <div><div class="measure-id">M-04</div><div class="measure-title">Service-account credential rotation industrialisation</div></div>
+        <div class="measure-badges"><span class="badge badge-complexity-high">High</span><span class="badge badge-effort">12–18 months</span></div>
+      </div>
+      <div class="measure-body">
+        <div class="measure-row"><div class="measure-row-label">Depends on</div><div class="measure-row-value">S-11</div></div>
+        <div class="measure-desc">
+          <p>Migrate service-account credential consumption from "vault dispenses, application caches forever" to short-lived, dynamically-issued credentials. For cloud-native: cloud-IAM workload identity (IRSA on AWS, workload identity on GCP, managed identities on Azure). For on-premise: Vault dynamic secrets or X.509 certificate-based authentication with short rotation.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="measure">
+      <div class="measure-header">
+        <div><div class="measure-id">M-05</div><div class="measure-title">Detection-engineering programme: behavioural rules and ATT&CK coverage</div></div>
+        <div class="measure-badges"><span class="badge badge-complexity-medium">Medium</span><span class="badge badge-effort">9–12 months initial</span></div>
+      </div>
+      <div class="measure-body">
+        <div class="measure-desc">
+          <p>Establish or scale a detection-engineering practice that produces, tests, deploys, and retires detections on a development-team cadence. Organise rule coverage against MITRE ATT&CK to expose blind spots. Rules are versioned in Git, tested against generated adversary behaviour, and have explicit signal/noise contracts.</p>
+          <div class="tech-detail">
+            <div class="tech-detail-label">Technical detail — priority behavioural detections</div>
+            <ul>
+              <li>Authentication primitive abuse — Kerberoasting (T1558.003), AS-REP roasting, Golden/Silver Ticket, DCSync.</li>
+              <li>Process injection lineage — code creating threads in remote processes (T1055), LSASS access patterns.</li>
+              <li>Living-off-the-land — abnormal sequences of LOLBINs (rundll32, regsvr32, mshta, certutil, bitsadmin) with network egress.</li>
+              <li>Cloud-control-plane recon — bulk enumerate-style API calls (List*, Describe*) from new principals.</li>
+              <li>Beaconing — periodic outbound connections with low jitter from server populations.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="measure">
+      <div class="measure-header">
+        <div><div class="measure-id">M-06</div><div class="measure-title">Deception infrastructure (canary tokens and decoy assets)</div></div>
+        <div class="measure-badges"><span class="badge badge-complexity-medium">Medium</span><span class="badge badge-effort">6–9 months</span></div>
+      </div>
+      <div class="measure-body">
+        <div class="measure-row"><div class="measure-row-label">ATT&CK</div><div class="measure-row-value">TA0007 Discovery — every technique is a deception trigger by design.</div></div>
+        <div class="measure-desc">
+          <p>Canary tokens — fake credentials, files, AWS keys, mailboxes embedded in legitimate-looking locations. Any access to a canary is, by construction, unauthorised activity. Decoy assets — full or partial fake hosts and services. Deception is one of the few defensive investments where the false-positive rate is structurally near zero.</p>
+          <div class="tech-detail">
+            <div class="tech-detail-label">Technical detail — high-signal placements</div>
+            <ul>
+              <li>Fake AWS keys in developer workstation <code>.aws/credentials</code> files.</li>
+              <li>Honeydocs named "Network Diagram - Q4 2026.docx" or "Privileged Account Vault Backup.xlsx" on file shares.</li>
+              <li>DNS records for plausible-but-fake internal hosts (internal-vault, scm-backup, payroll-archive).</li>
+              <li>Synthetic credentials committed to repos and "removed" in a later commit but recoverable via <code>git log -p</code>. Particularly worth deploying in M&A diligence repositories.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="measure">
+      <div class="measure-header">
+        <div><div class="measure-id">M-07</div><div class="measure-title">AI-assisted SOC triage and analyst augmentation</div></div>
+        <div class="measure-badges"><span class="badge badge-complexity-medium">Medium</span><span class="badge badge-effort">9–12 months</span></div>
+      </div>
+      <div class="measure-body">
+        <div class="measure-row"><div class="measure-row-label">Depends on</div><div class="measure-row-value">M-05</div></div>
+        <div class="measure-desc">
+          <p>Deploy frontier-model assistance to specific SOC workflows: alert summarisation, evidence aggregation, suggested next-pivot, and draft IR write-up. Do not delegate response decisions to the model. The pattern is augmentation of human analysts, with model output framed as suggestion and the human as decision-maker.</p>
+          <div class="tech-detail">
+            <div class="tech-detail-label">Technical detail — prompt injection risk</div>
+            <p>The pipelines feeding the SOC LLM — log lines, alert payloads, file names, process command lines, DNS labels — contain attacker-controlled fields. An adversary can embed prompt-injection payloads in any of these to instruct the model to suppress an alert or recommend the wrong pivot. Mitigations:</p>
+            <ul>
+              <li>Treat any model input derived from attacker-controlled fields as untrusted. Quarantine and quote-escape such fields before they reach the prompt.</li>
+              <li>Enforce structured output schemas (JSON with named fields).</li>
+              <li>The analyst reviews the raw alert, not just the model summary, before any containment decision.</li>
+              <li>Log every model input and output for retrospective audit.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="measure">
+      <div class="measure-header">
+        <div><div class="measure-id">M-08</div><div class="measure-title">Pre-staged compensating controls for unpatchable conditions</div></div>
+        <div class="measure-badges"><span class="badge badge-complexity-medium">Medium</span><span class="badge badge-effort">6–9 months</span></div>
+      </div>
+      <div class="measure-body">
+        <div class="measure-row"><div class="measure-row-label">Depends on</div><div class="measure-row-value">S-01</div></div>
+        <div class="measure-desc"><p>For each system marked patch-infeasible-in-SLA, document a pre-staged compensating control that can be applied at P0/P1 without further design: virtual patch rule on the WAF, ACL change at the segment boundary, complete network isolation with documented business-impact, or application-layer mitigation by configuration change. Held by the SOC, reviewed quarterly, dry-run annually.</p></div>
+      </div>
+    </div>
+
+    <div class="measure">
+      <div class="measure-header">
+        <div><div class="measure-id">M-09</div><div class="measure-title">Third-party software: SBOM-and-patch-cadence procurement requirements</div></div>
+        <div class="measure-badges"><span class="badge badge-complexity-medium">Medium</span><span class="badge badge-effort">12–24 months</span></div>
+      </div>
+      <div class="measure-body">
+        <div class="measure-desc"><p>Add to procurement standard terms at next renewal: (1) vendor produces and shares SBOMs on each release; (2) vendor commits to maximum patch cadence for critical vulnerabilities (target: 7 days for KEV-listed); (3) vendor notifies of any active exploitation within a defined window; (4) vendor permits compensating controls (does not contractually forbid WAF rules). This is procurement and legal work, not engineering work.</p></div>
+      </div>
+    </div>
+
+    <div class="measure">
+      <div class="measure-header">
+        <div><div class="measure-id">M-10</div><div class="measure-title">Recovery rehearsal: ransomware-grade incident drill against Tier-1 application</div></div>
+        <div class="measure-badges"><span class="badge badge-complexity-high">High</span><span class="badge badge-effort">First run 6–9 months</span></div>
+      </div>
+      <div class="measure-body">
+        <div class="measure-row"><div class="measure-row-label">Depends on</div><div class="measure-row-value">M-11</div></div>
+        <div class="measure-desc"><p>Run an end-to-end recovery drill against one Tier-1 application, treating it as if compromised by ransomware-class destructive attack. The drill must be unannounced to the application owner team beyond the date window. Run with actual on-call personnel. Time every step. The output is a remediation list of every assumption that proved incorrect. In my experience, actual recovery times tend to run several multiples longer than the figure documented in the BCP.</p></div>
+      </div>
+    </div>
+
+    <div class="measure">
+      <div class="measure-header">
+        <div><div class="measure-id">M-11</div><div class="measure-title">Backup immutability and recovery-path validation</div></div>
+        <div class="measure-badges"><span class="badge badge-complexity-high">High</span><span class="badge badge-effort">9–12 months</span></div>
+      </div>
+      <div class="measure-body">
+        <div class="measure-row"><div class="measure-row-label">ATT&CK</div><div class="measure-row-value">T1490 Inhibit System Recovery; T1485 Data Destruction; T1486 Data Encrypted for Impact.</div></div>
+        <div class="measure-desc">
+          <p>Enforce immutability or true air-gap for the recovery copy of every Tier-0 and Tier-1 system. The objective is that no operationally-resident credential can delete or encrypt the recovery tier within its retention window. Validate this independently rather than relying on the platform's marketing.</p>
+          <div class="tech-detail">
+            <div class="tech-detail-label">Technical detail — minimum control set</div>
+            <ul>
+              <li>Immutability at storage layer (S3 Object Lock compliance mode, Azure immutable blobs). Retention ≥ 90 days.</li>
+              <li>Backup admin credentials in a separate identity domain from production admin credentials.</li>
+              <li>Air-gapped tier (cold offline copy) for the most critical 5–10 systems, restored from independently at least annually.</li>
+              <li>Automated test restore on a defined cadence (weekly for top tier, monthly for the rest), with the restored system actually booted and smoke-tested.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 6. LONG TERM ── -->
+  <section id="long-term">
+    <h2>6. Long term (18+ months)</h2>
+    <p>Six measures, all architectural in nature. These are changes that take quarters to design and years to land. Listing something here is not a commitment to do it — it is a flag that the work needs evaluation and, if pursued, programme-grade governance.</p>
+
+    <div class="measure">
+      <div class="measure-header">
+        <div><div class="measure-id">L-01</div><div class="measure-title">Identity-centric zero-trust architecture across the application estate</div></div>
+        <div class="measure-badges"><span class="badge badge-complexity-veryhigh">Very High</span><span class="badge badge-effort">24–36 months</span></div>
+      </div>
+      <div class="measure-body">
+        <div class="measure-row"><div class="measure-row-label">Depends on</div><div class="measure-row-value">S-06, S-08, M-03, M-04</div></div>
+        <div class="measure-desc"><p>Replace the existing perimeter-and-VPN model with a zero-trust architecture where every application access is authenticated, authorised, and continuously evaluated against device posture and session risk, regardless of network origin. East-west traffic encrypted and authenticated via service mesh. Application access brokered through identity-aware proxies.</p></div>
+      </div>
+    </div>
+
+    <div class="measure">
+      <div class="measure-header">
+        <div><div class="measure-id">L-02</div><div class="measure-title">Microsegmentation extended to the full estate</div></div>
+        <div class="measure-badges"><span class="badge badge-complexity-veryhigh">Very High</span><span class="badge badge-effort">24–36 months</span></div>
+      </div>
+      <div class="measure-body">
+        <div class="measure-row"><div class="measure-row-label">Depends on</div><div class="measure-row-value">M-03</div></div>
+        <div class="measure-desc"><p>Extend the microsegmentation programme from Tier-0/Tier-1 systems to the rest of the production estate. Scoped to the long term because the operational learning curve from M-03 takes 12–18 months to consolidate before the team is ready to scale the pattern to dozens of additional application groups.</p></div>
+      </div>
+    </div>
+
+    <div class="measure">
+      <div class="measure-header">
+        <div><div class="measure-id">L-03</div><div class="measure-title">Detection coverage maturity to assessed parity with adversary kill chains</div></div>
+        <div class="measure-badges"><span class="badge badge-complexity-veryhigh">Very High</span><span class="badge badge-effort">24–36 months continuous</span></div>
+      </div>
+      <div class="measure-body">
+        <div class="measure-row"><div class="measure-row-label">Depends on</div><div class="measure-row-value">M-05</div></div>
+        <div class="measure-desc"><p>Maturity destination for the detection programme: every ATT&CK technique relevant to the institution's environment has at least one detection of documented signal-to-noise quality. Purple-team exercises run continuously. A note on what is realistically achievable: even mature programmes do not reach 100% ATT&CK coverage. In my experience the curve tends to flatten somewhere in the 60–70% range.</p></div>
+      </div>
+    </div>
+
+    <div class="measure">
+      <div class="measure-header">
+        <div><div class="measure-id">L-04</div><div class="measure-title">AI-on-AI defence: autonomous response with bounded action authority</div></div>
+        <div class="measure-badges"><span class="badge badge-complexity-veryhigh">Very High</span><span class="badge badge-effort">24+ months</span></div>
+      </div>
+      <div class="measure-body">
+        <div class="measure-row"><div class="measure-row-label">Depends on</div><div class="measure-row-value">M-05, M-07</div></div>
+        <div class="measure-desc">
+          <p>Define a small, well-bounded set of containment actions that can be taken autonomously on high-confidence detections without human approval. Examples: isolating a non-production endpoint, disabling a non-privileged user session, blocking a specific outbound destination at the proxy. The boundary is what is reversible and low-blast-radius.</p>
+          <div class="tech-detail">
+            <div class="tech-detail-label">Technical detail — action-authority boundaries</div>
+            <ul>
+              <li><strong>Permitted autonomous:</strong> isolating a workstation in a non-production segment on confirmed C2; revoking a session token on confirmed token-theft; blocking a specific outbound IP on confirmed C2.</li>
+              <li><strong>Always human-approved:</strong> any action affecting customer-facing services; any account disable for a privileged user; any production-server isolation; any cloud-tenant-wide control change.</li>
+              <li><strong>Forbidden:</strong> autonomous offensive action. Defensive only.</li>
+            </ul>
+            <p>The system must include an emergency stop that disables all autonomy on operator command.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="measure">
+      <div class="measure-header">
+        <div><div class="measure-id">L-05</div><div class="measure-title">Targeted replacement of unsupportable legacy infrastructure</div></div>
+        <div class="measure-badges"><span class="badge badge-complexity-veryhigh">Very High</span><span class="badge badge-effort">Aligned to IT modernisation</span></div>
+      </div>
+      <div class="measure-body">
+        <div class="measure-row"><div class="measure-row-label">Depends on</div><div class="measure-row-value">M-08</div></div>
+        <div class="measure-desc"><p>Identify the specific legacy systems that are the locus of the highest residual risk after compensating controls have been applied, and integrate their replacement into the IT modernisation roadmap with cyber-posture as an explicit prioritisation criterion. This is a security input into the existing modernisation prioritisation process, not a security-led programme.</p></div>
+      </div>
+    </div>
+
+    <div class="measure">
+      <div class="measure-header">
+        <div><div class="measure-id">L-06</div><div class="measure-title">Sectoral defensive co-operation participation</div></div>
+        <div class="measure-badges"><span class="badge badge-complexity-medium">Medium</span><span class="badge badge-effort">Ongoing</span></div>
+      </div>
+      <div class="measure-body">
+        <div class="measure-desc"><p>Maintain and extend participation in sectoral information-sharing channels with explicit focus on AI-augmented adversary intelligence: TTP observations, indicator sharing, vendor vulnerability coordination. Listed in the long-term section because the structural co-operation channels beyond what FS-ISAC already provides are not yet established. The action today is to participate in their formation.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 7. MATRIX ── -->
+  <section id="matrix">
+    <h2>7. Complexity matrix and sequencing dependencies</h2>
+    <div class="matrix-wrap">
+      <table>
+        <thead>
+          <tr><th>ID</th><th>Measure</th><th>Complexity</th><th>Effort</th><th>Depends on</th></tr>
+        </thead>
+        <tbody>
+          <tr class="phase-row"><td colspan="5">Short term (0–6 months)</td></tr>
+          <tr><td>S-01</td><td>Recalibrate vulnerability SLAs (CVSS/EPSS/KEV)</td><td>Low</td><td>2–4 weeks</td><td>—</td></tr>
+          <tr><td>S-02</td><td>Emergency-change pathway</td><td>Low</td><td>2–3 weeks</td><td>S-01</td></tr>
+          <tr><td>S-03</td><td>Internet-facing attack surface inventory</td><td>Low</td><td>4–6 weeks</td><td>—</td></tr>
+          <tr><td>S-04</td><td>AI-grade phishing simulation uplift</td><td>Low</td><td>6–8 weeks</td><td>—</td></tr>
+          <tr><td>S-05</td><td>PAM tightening: JIT and session recording</td><td>Medium</td><td>3–4 months</td><td>—</td></tr>
+          <tr><td>S-06</td><td>Phishing-resistant MFA (WebAuthn/FIDO2)</td><td>Medium</td><td>3–6 months</td><td>—</td></tr>
+          <tr><td>S-07</td><td>EDR coverage and tamper-detection</td><td>Low</td><td>3–4 weeks</td><td>—</td></tr>
+          <tr><td>S-08</td><td>Identity-protection alerts</td><td>Low</td><td>2–4 weeks</td><td>—</td></tr>
+          <tr><td>S-09</td><td>Egress filtering and DNS sinkholing</td><td>Low</td><td>4–6 weeks</td><td>—</td></tr>
+          <tr><td>S-10</td><td>Critical-asset patch tabletop</td><td>Low</td><td>4 weeks</td><td>S-01, S-02</td></tr>
+          <tr><td>S-11</td><td>Service-account inventory</td><td>Medium</td><td>3–6 months</td><td>—</td></tr>
+          <tr><td>S-12</td><td>AI scenarios in current TLPT cycle</td><td>Medium</td><td>Current cycle</td><td>—</td></tr>
+          <tr class="phase-row"><td colspan="5">Medium term (6–18 months)</td></tr>
+          <tr><td>M-01</td><td>Continuous attack-surface management</td><td>Medium</td><td>6–9 months</td><td>S-03</td></tr>
+          <tr><td>M-02</td><td>SBOM-driven first-party vuln response</td><td>High</td><td>9–15 months</td><td>—</td></tr>
+          <tr><td>M-03</td><td>Microsegmentation of Tier-0/Tier-1</td><td>High</td><td>12–18 months</td><td>—</td></tr>
+          <tr><td>M-04</td><td>Service-account credential rotation</td><td>High</td><td>12–18 months</td><td>S-11</td></tr>
+          <tr><td>M-05</td><td>Detection-engineering programme</td><td>Medium</td><td>9–12 months</td><td>—</td></tr>
+          <tr><td>M-06</td><td>Deception infrastructure</td><td>Medium</td><td>6–9 months</td><td>—</td></tr>
+          <tr><td>M-07</td><td>AI-assisted SOC triage</td><td>Medium</td><td>9–12 months</td><td>M-05</td></tr>
+          <tr><td>M-08</td><td>Pre-staged compensating controls</td><td>Medium</td><td>6–9 months</td><td>S-01</td></tr>
+          <tr><td>M-09</td><td>Third-party SBOM procurement reqs</td><td>Medium</td><td>12–24 months</td><td>—</td></tr>
+          <tr><td>M-10</td><td>Recovery rehearsal drill</td><td>High</td><td>6–9 months</td><td>M-11</td></tr>
+          <tr><td>M-11</td><td>Backup immutability & recovery-path validation</td><td>High</td><td>9–12 months</td><td>—</td></tr>
+          <tr class="phase-row"><td colspan="5">Long term (18+ months)</td></tr>
+          <tr><td>L-01</td><td>Identity-centric zero-trust architecture</td><td>Very High</td><td>24–36 months</td><td>S-06, S-08, M-03, M-04</td></tr>
+          <tr><td>L-02</td><td>Microsegmentation full estate</td><td>Very High</td><td>24–36 months</td><td>M-03</td></tr>
+          <tr><td>L-03</td><td>Detection coverage maturity</td><td>Very High</td><td>24–36 months</td><td>M-05</td></tr>
+          <tr><td>L-04</td><td>AI-on-AI bounded autonomous response</td><td>Very High</td><td>24+ months</td><td>M-05, M-07</td></tr>
+          <tr><td>L-05</td><td>Targeted legacy replacement</td><td>Very High</td><td>Modernisation aligned</td><td>M-08</td></tr>
+          <tr><td>L-06</td><td>Sectoral defensive co-operation</td><td>Medium</td><td>Ongoing</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>7.1 Recommended sequencing — five parallel programme streams</h3>
+    <ul>
+      <li><strong>Vulnerability and patch stream:</strong> S-01 → S-02 → S-10 → M-08 → L-05</li>
+      <li><strong>Identity and access stream:</strong> S-05, S-06, S-08 in parallel → S-11 → M-04 → L-01</li>
+      <li><strong>Endpoint and detection stream:</strong> S-07, S-09 in parallel → M-05 → M-07 → L-03 → L-04</li>
+      <li><strong>Network architecture stream:</strong> S-03 → M-01 → M-03 → L-02</li>
+      <li><strong>Software supply chain stream:</strong> M-02 and M-09 in parallel</li>
+      <li><strong>Cross-cutting (run continuously):</strong> S-04 phishing programme; M-06 deception; M-11 → M-10; S-12 then ongoing TLPT; L-06 sectoral co-operation</li>
+    </ul>
+  </section>
+
+  <!-- ── 8. CLOSING ── -->
+  <div class="closing" id="closing">
+    <h2>8. Two things I keep coming back to</h2>
+    <p><strong>8.1 The best defence against an AI attacker is mastering AI defence.</strong> The pace, scale, and parallelism that frontier AI gives to attackers cannot be matched by human defenders alone. We should not pretend otherwise. The institutions that come out of this period in the strongest position will be the ones that learn to apply frontier AI on the defensive side at least as competently as their adversaries are applying it on the offensive side — in detection, in triage, in vulnerability discovery, in red teaming, eventually in bounded autonomous response (L-04). That is not an abdication of human judgement. It is an honest read of where the asymmetry is, and the only realistic way I see of closing it.</p>
+    <p style="margin-top:1rem"><strong>8.2 The knowledge is already in the technical teams; management has to make it safe to surface.</strong> In every organisation I have worked with, there is a striking amount of awareness within the engineering, SOC, and infrastructure teams about exactly where the weak points are. People know which systems are out of patch cycle, which controls are bypassed in practice, which alerts get ignored, which compensating controls only exist on paper. What changes from one organisation to another is whether that knowledge surfaces upwards proactively, or whether it stays buried until an incident drags it out under unflattering circumstances. This is not a technical problem. It is a management one. I would go further and say that the gap between organisations that handle AI-augmented threats well and ones that do not will be explained more by this management posture than by any single technical investment.</p>
+  </div>
+
+  <!-- ── ANNEX A ── -->
+  <section id="annex-a">
+    <h2>Annex A — Detection-engineering patterns</h2>
+    <p>The patterns below are illustrative, not exhaustive. Written in pseudo-Sigma form with normalised ECS/Sigma field names.</p>
+
+    <div class="annex-section">
+      <h3>A.1 EDR tamper detection (T1562.001)</h3>
+<pre>title: EDR Agent Service Stopped or Uninstalled
+logsource:
+  product: windows
+  service: system
+detection:
+  selection_event:
+    EventID: 7036
+    ServiceName|contains:
+      - 'CSFalconService'   # CrowdStrike
+      - 'SentinelAgent'     # SentinelOne
+      - 'WinDefend'         # Defender
+    State: 'stopped'
+  selection_uninstall:
+    EventID: 1033
+    Product|contains:
+      - 'CrowdStrike Falcon'
+      - 'SentinelOne Agent'
+  condition: selection_event or selection_uninstall
+level: high
+tags:
+  - attack.defense_evasion
+  - attack.t1562.001</pre>
+    </div>
+
+    <div class="annex-section">
+      <h3>A.2 Suspicious LSASS access (T1003.001)</h3>
+<pre>title: LSASS Memory Read by Non-System Process
+logsource:
+  product: windows
+  category: process_access
+detection:
+  selection:
+    TargetImage|endswith: '\\lsass.exe'
+    GrantedAccess|contains:
+      - '0x1010'
+      - '0x1038'
+      - '0x1418'
+      - '0x1438'
+      - '0x1f0fff'
+      - '0x1f1fff'
+  filter_legit:
+    SourceImage|endswith:
+      - '\\MsMpEng.exe'
+      - '\\CSFalconService.exe'
+  condition: selection and not filter_legit
+level: high
+tags:
+  - attack.credential_access
+  - attack.t1003.001</pre>
+    </div>
+
+    <div class="annex-section">
+      <h3>A.3 Beaconing detection (T1071, T1568.002)</h3>
+<pre># Scheduled query against proxy/firewall logs (every 30 minutes)
+events
+| where event.kind == 'network' and direction == 'outbound'
+| where source.ip in (server_segment_cidrs)
+| bin time = bin(@timestamp, 1m)
+| summarize
+    connections = count(),
+    distinct_dst = dcount(destination.domain),
+    intervals = make_list(time)
+    by source.ip, destination.domain
+| extend interval_stddev = series_stddev(intervals_to_diffs(intervals))
+| where connections >= 12      # at least 12 events in window
+| where interval_stddev < 5   # low jitter
+| where distinct_dst <= 2     # narrow set of destinations
+| project source.ip, destination.domain, connections, interval_stddev</pre>
+    </div>
+
+    <div class="annex-section">
+      <h3>A.4 Cloud-control-plane reconnaissance (T1580, T1538)</h3>
+<pre>title: Bulk Enumerate Operations from New Principal (AWS)
+logsource:
+  product: aws
+  service: cloudtrail
+detection:
+  selection:
+    eventName|startswith:
+      - 'List'
+      - 'Describe'
+      - 'Get'
+    timeframe: 10m
+    condition: selection | count() by userIdentity.arn > 100
+fields:
+  - userIdentity.arn
+  - sourceIPAddress
+  - userAgent
+level: medium
+tags:
+  - attack.discovery
+  - attack.t1580</pre>
+    </div>
+
+    <div class="annex-section">
+      <h3>A.5 OAuth consent abuse (T1528)</h3>
+<pre>title: Consent Granted to Newly Registered Application
+logsource:
+  product: m365
+  service: azuread_audit
+detection:
+  selection:
+    Operation: 'Consent to application.'
+    Result: 'Success'
+  enrich:
+    application_age: lookup(ApplicationId, 'app_registration_date')
+  condition: selection and application_age < 30d
+level: high
+tags:
+  - attack.credential_access
+  - attack.t1528</pre>
+    </div>
+
+    <div class="annex-section">
+      <h3>A.6 AI-specific patterns (ATT&CK v19 T1682, T1683)</h3>
+      <p><strong>Pattern 6.1 — bulk LLM API egress from non-developer populations.</strong> Outbound connections to public inference endpoints (<code>api.openai.com</code>, <code>api.anthropic.com</code>, <code>generativelanguage.googleapis.com</code>) from server populations or unauthorised workstation populations. Tune against the institution's approved-AI-tools allow-list.</p>
+      <p><strong>Pattern 6.2 — prompt-injection signal in attacker-controlled fields.</strong> Look for instruction-formatted content in fields that feed AI tooling: long Base64 blobs in User-Agent strings, <code>SYSTEM:</code> or <code>### Instruction</code> tokens in DNS labels, command lines, or process names, and unusual unicode patterns (zero-width characters, RTL overrides) in fields the SOC LLM reads.</p>
+      <p><strong>Pattern 6.3 — AI-assisted credential stuffing.</strong> High-volume authentication failures distributed across many source IPs (rotated proxies) but with suspiciously homogeneous TLS fingerprints (JA3/JA4) or user-agent strings — the signature of a single tool driving many endpoints.</p>
+    </div>
+  </section>
+
+  <!-- ── ANNEX B ── -->
+  <section id="annex-b">
+    <h2>Annex B — Vulnerability prioritisation reference</h2>
+
+    <h3>B.1 The four signals</h3>
+    <ul>
+      <li><strong>CVSS</strong> — Technical severity if exploited. Range 0–10. Use v3.1 base score until v4 is universally adopted.</li>
+      <li><strong>EPSS</strong> — Probability of exploitation in the next 30 days (0–1). Updated daily. v4 model live since March 2025. API: <code>https://api.first.org/data/v1/epss</code></li>
+      <li><strong>KEV</strong> — CISA Known Exploited Vulnerabilities. Confirmed in-the-wild exploitation. Treat as P0 regardless of CVSS or EPSS. Feed: <code>https://www.cisa.gov/kev</code></li>
+      <li><strong>Asset context</strong> — Internet-exposed? Tier-0/Tier-1? Holds regulated data? Patchable in SLA?</li>
+    </ul>
+
+    <h3>B.2 Decision matrix</h3>
+    <div class="matrix-wrap">
+      <table>
+        <thead><tr><th>Tier</th><th>Trigger condition (any)</th><th>SLA (internet-exposed)</th></tr></thead>
+        <tbody>
+          <tr><td>P0 — emergency</td><td>On KEV; OR EPSS ≥ 0.6; OR vendor advisory references active exploitation</td><td>Patch within 8h; compensating control within 4h</td></tr>
+          <tr><td>P1 — pre-emergency</td><td>CVSS ≥ 8.0 AND EPSS ≥ 0.1, not yet KEV</td><td>Patch within 24h</td></tr>
+          <tr><td>P2 — high</td><td>CVSS ≥ 7.0 OR EPSS ≥ 0.05</td><td>Patch within 7 days</td></tr>
+          <tr><td>P3 — standard</td><td>Below P2 thresholds</td><td>Standard 30-day cycle</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>For non-internet-exposed assets, shift each tier by one level. For Tier-0 assets, keep internet-exposed SLAs even if the asset is internal.</p>
+
+    <h3>B.3 EPSS trend signal</h3>
+    <p>Persist daily EPSS snapshots. A CVE whose EPSS doubles in a week deserves attention even if its current absolute value is moderate. This early-warning signal frequently precedes KEV listing by days. Practical rule: trigger only when the doubling condition AND the new value is at or above 0.02.</p>
+
+    <h3>B.4 Caveats</h3>
+    <ul>
+      <li>EPSS can underestimate a vulnerability exploited in targeted operations against specific industries before broad exploitation begins. Maintain a manual override path for threat intelligence on financial-sector-targeted CVEs.</li>
+      <li>KEV is reactive — by the time a CVE is added, broad exploitation is already happening. Use EPSS as the leading signal.</li>
+      <li>Vendor advisories sometimes precede public CVE assignment. Treat "actively exploited" language in a vendor advisory as P0 regardless of whether the CVE is yet on KEV.</li>
+    </ul>
+  </section>
+
+  <!-- ── ANNEX C ── -->
+  <section id="annex-c">
+    <h2>Annex C — Glossary</h2>
+    <ul style="font-family: 'IBM Plex Sans', sans-serif; font-size: 0.88rem; line-height: 1.9;">
+      <li><strong>AiTM</strong> — Adversary-in-the-Middle. Phishing pattern where the attacker proxies the legitimate authentication site, capturing credentials and session tokens. Defeated by phishing-resistant MFA bound to the origin domain.</li>
+      <li><strong>ASM / EASM</strong> — Attack Surface Management / External Attack Surface Management. Continuous discovery of internet-exposed assets attributable to the organisation.</li>
+      <li><strong>ATT&CK</strong> — MITRE adversary tactics and techniques framework. ATT&CK v19 (released 28 April 2026) introduced changes including splitting the Defense Evasion tactic and reorganising social-engineering techniques under T1684.</li>
+      <li><strong>CISA KEV</strong> — US Cybersecurity and Infrastructure Security Agency Known Exploited Vulnerabilities catalogue. Free feed; daily updates.</li>
+      <li><strong>CMDB</strong> — Configuration Management Database. The authoritative register of IT assets, services, ownership, and relationships.</li>
+      <li><strong>CVSS</strong> — Common Vulnerability Scoring System. Severity score from 0 to 10.</li>
+      <li><strong>EDR</strong> — Endpoint Detection and Response. Agent-based endpoint security platform.</li>
+      <li><strong>EPSS</strong> — Exploit Prediction Scoring System. Daily-updated probability (0–1) that a given CVE will be exploited within 30 days. Maintained by FIRST.org.</li>
+      <li><strong>FIDO2 / WebAuthn</strong> — Open standards for phishing-resistant authentication. Cryptographically binds the authentication ceremony to the origin domain.</li>
+      <li><strong>JIT</strong> — Just-in-Time. Privilege model where elevation is granted only on request, with time bounds.</li>
+      <li><strong>LOLBIN</strong> — Living-off-the-Land Binary. Legitimate signed system binary repurposed by adversaries to evade allow-listing.</li>
+      <li><strong>MCP</strong> — Model Context Protocol. Open standard introduced by Anthropic in late 2024 for AI tools to connect to external data sources and services. Compromised or malicious MCP servers were a notable attack vector in 2025–26.</li>
+      <li><strong>MFA</strong> — Multi-Factor Authentication. Phishing-resistant variants (FIDO2/WebAuthn, platform passkeys) are the only forms still considered secure against modern AiTM attacks.</li>
+      <li><strong>Mythos Preview</strong> — Frontier general-purpose AI model announced by Anthropic in April 2026 with notable cyber capabilities; access restricted via Project Glasswing. Cited as the proximate driver of this article.</li>
+      <li><strong>NRD</strong> — Newly Registered Domain. Domain whose registration is recent (commonly under 30 days). High-signal indicator for malicious infrastructure.</li>
+      <li><strong>PAM</strong> — Privileged Access Management. Platform category for managing administrative credentials and sessions.</li>
+      <li><strong>RTO</strong> — Recovery Time Objective. The target maximum elapsed time between an outage starting and service being restored.</li>
+      <li><strong>SBOM</strong> — Software Bill of Materials. Machine-readable list of components within a software product. Standard formats: CycloneDX, SPDX.</li>
+      <li><strong>Sigma</strong> — Vendor-neutral detection rule format, translatable to most SIEM query languages.</li>
+      <li><strong>SIEM</strong> — Security Information and Event Management. Platform aggregating security telemetry and running detection rules.</li>
+      <li><strong>SOAR</strong> — Security Orchestration, Automation and Response. Platform for codifying response playbooks.</li>
+      <li><strong>SPIFFE / SPIRE</strong> — Open standards for issuing short-lived cryptographic identities (SVIDs) to workloads, used as the basis for service-to-service mTLS.</li>
+      <li><strong>SSVC</strong> — Stakeholder-Specific Vulnerability Categorization. CISA decision-tree framework for prioritisation incorporating mission impact and exposure.</li>
+      <li><strong>TLPT</strong> — Threat-Led Penetration Testing. Mandatory under DORA Articles 26–27 for designated significant institutions; equivalent: CBEST (UK), TIBER-EU.</li>
+      <li><strong>Tier-0/1/2</strong> — Microsoft administrative tier model. Tier-0 = identity and core security infrastructure; Tier-1 = production application servers; Tier-2 = workstation administration.</li>
+      <li><strong>WAF</strong> — Web Application Firewall. Application-layer filtering, capable of virtual patching for HTTP-exposed vulnerabilities.</li>
+    </ul>
+  </section>
+
+</div>
+
+<footer>
+  <span>Kirill Karmanov · April 2026</span>
+  <span>Personal research workpaper — views do not represent any employer or client</span>
+</footer>
+
+</body>
+</html>
